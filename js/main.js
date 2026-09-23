@@ -9,6 +9,29 @@
 const numeroHotel = "51935139031";
 
 // =====================================
+// VALIDAR PROMOCIÓN AGOSTO
+// =====================================
+
+function validarPromocionAgosto(fechaEntrada, fechaSalida) {
+
+    const entrada = new Date(fechaEntrada);
+    const salida = new Date(fechaSalida);
+
+    const inicioAgosto = new Date(entrada.getFullYear(), 7, 1);
+    const finAgosto = new Date(entrada.getFullYear(), 7, 31);
+
+    if (
+        entrada >= inicioAgosto &&
+        salida <= finAgosto
+    ) {
+        return "15% descuento - Promoción especial agosto";
+    }
+
+    return "No aplica";
+
+}
+
+// =====================================
 // MENÚ MÓVIL
 // =====================================
 const menuButton = document.querySelector(".menu-mobile");
@@ -48,7 +71,7 @@ window.addEventListener("scroll", () => {
 // SCROLL SUAVE
 // =====================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
+    anchor.addEventListener("click", function (e) {
         const target = document.querySelector(this.getAttribute("href"));
 
         if (target) {
@@ -105,6 +128,11 @@ if (form) {
         const huespedes = document.querySelector("#huespedes").value;
         const habitacion = document.querySelector("#habitacion").value;
         const mensajeCliente = document.querySelector("#mensaje").value;
+        const promocion = validarPromocionAgosto(
+            fechaEntrada,
+            fechaSalida
+        );
+
 
         if (!nombre || !correo || !telefono || !fechaEntrada || !fechaSalida) {
             alert("Completa todos los campos obligatorios.");
@@ -135,6 +163,9 @@ ${huespedes}
 
 🏠 Habitación:
 ${habitacion}
+
+🎁 Promoción:
+${promocion}
 
 💬 Mensaje:
 ${mensajeCliente || "Sin mensaje adicional"}
