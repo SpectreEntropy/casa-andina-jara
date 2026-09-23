@@ -55,6 +55,24 @@ document.querySelectorAll(".navigation a").forEach(link => {
 });
 
 // =====================================
+// ACTIVAR PROMOCIÓN DESDE BOTÓN
+// =====================================
+
+const botonPromocion = document.querySelector("#btnPromocion");
+const avisoPromocion = document.querySelector("#avisoPromocion");
+
+
+if (botonPromocion && avisoPromocion) {
+
+    botonPromocion.addEventListener("click", () => {
+
+        avisoPromocion.style.display = "block";
+
+    });
+
+}
+
+// =====================================
 // HEADER SCROLL
 // =====================================
 const header = document.querySelector(".header");

@@ -202,7 +202,9 @@
             <div class="promotion-box">
                 <h2>15% de descuento en temporada especial</h2>
                 <p>Disfruta un 15% de descuento en estadías realizadas durante agosto.</p>
-                <a href="#reserva" class="btn-primary">Aprovechar promoción</a>
+                <a href="#reserva" class="btn-primary" id="btnPromocion">
+                    Aprovechar promoción
+                </a>
             </div>
         </div>
     </section>
@@ -213,6 +215,10 @@
             <div class="reservation-box">
                 <h2>Reserva tu estadía</h2>
                 <p>Completa tus datos y consulta la disponibilidad de tu habitación.</p>
+                <div id="avisoPromocion" class="promo-alert">
+                    Promoción de agosto seleccionada.
+                    La estadía debe realizarse entre el 01 y 31 de agosto para aplicar el descuento.
+                </div>
 
                 <form>
                     <input type="text" id="nombre" placeholder="Nombre completo" required>

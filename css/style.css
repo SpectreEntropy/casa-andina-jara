@@ -570,3 +570,22 @@ footer p {
     z-index: 999;
     box-shadow: 0 10px 30px rgba(0,0,0,.2);
 }
+
+/*mantener oculto el aviso de promocion activa */
+.promo-alert {
+
+    display: none;
+
+    background: #f5eadf;
+    color: #743719;
+
+    padding: 15px 20px;
+
+    border-radius: 12px;
+
+    margin-top: 25px;
+
+    font-size: 14px;
+
+}
+
