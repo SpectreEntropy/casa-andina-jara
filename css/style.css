@@ -208,22 +208,6 @@ img {
 /* =====================================
    BOOKING
 ===================================== */
-.booking {
-    margin-top: -60px;
-    position: relative;
-    z-index: 10;
-}
-
-.booking-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
 .field {
     display: flex;
     flex-direction: column;
@@ -443,11 +427,15 @@ img {
     gap: 20px;
 }
 
-.reservation-box input, .reservation-box textarea {
+.reservation-box input,
+.reservation-box select,
+.reservation-box textarea {
     padding: 16px;
     border-radius: 10px;
     border: 1px solid var(--border);
     font-family: inherit;
+    width: 100%;
+    background: white;
 }
 
 .reservation-box textarea {

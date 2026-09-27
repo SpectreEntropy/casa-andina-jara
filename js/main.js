@@ -101,31 +101,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// =====================================
-// CONSULTAR DISPONIBILIDAD
-// BOTÓN DEL BUSCADOR SUPERIOR
-// =====================================
-const botonBuscar = document.querySelector(".booking-card button");
-
-if (botonBuscar) {
-    botonBuscar.addEventListener("click", () => {
-        const fechas = document.querySelectorAll(".booking-card input");
-        const entrada = fechas[0].value;
-        const salida = fechas[1].value;
-        const huespedes = document.querySelector(".booking-card select").value;
-
-        if (!entrada || !salida) {
-            alert("Selecciona la fecha de llegada y salida.");
-            return;
-        }
-
-        const mensaje = `Hola Casa Andina Jara 👋\n\nDeseo consultar disponibilidad.\n\n📅 Llegada:\n${entrada}\n\n📅 Salida:\n${salida}\n\n👥 Huéspedes:\n${huespedes}\n\n¿Podrían indicarme disponibilidad y tarifas?\n\nGracias.`;
-
-        const url = "https://wa.me/" + numeroHotel + "?text=" + encodeURIComponent(mensaje);
-
-        window.open(url, "_blank");
-    });
-}
 
 // =====================================
 // FORMULARIO DE RESERVA
@@ -134,9 +109,54 @@ if (botonBuscar) {
 
 const form = document.querySelector(".reservation-box form");
 
+const inputEntrada = document.querySelector("#fechaEntrada");
+const inputSalida = document.querySelector("#fechaSalida");
+
+const hoy = new Date();
+const fechaMinima =
+    hoy.getFullYear() + "-" +
+    String(hoy.getMonth() + 1).padStart(2, "0") + "-" +
+    String(hoy.getDate()).padStart(2, "0");
+
+if (inputEntrada && inputSalida) {
+    inputEntrada.min = fechaMinima;
+    inputSalida.min = fechaMinima;
+
+    inputEntrada.addEventListener("change", () => {
+        inputSalida.min = inputEntrada.value;
+
+        if (
+            inputSalida.value &&
+            inputSalida.value <= inputEntrada.value
+        ) {
+            inputSalida.value = "";
+        }
+    });
+}
+
 if (form) {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        // =====================================
+        // SELECCIONAR HABITACIÓN DESDE TARJETA
+        // =====================================
+
+        const botonesHabitacion = document.querySelectorAll(
+            ".btn-reservar-habitacion"
+        );
+
+        const selectHabitacion = document.querySelector("#habitacion");
+
+        botonesHabitacion.forEach(boton => {
+            boton.addEventListener("click", () => {
+                const habitacion = boton.dataset.habitacion;
+
+                if (selectHabitacion) {
+                    selectHabitacion.value = habitacion;
+                }
+            });
+        });
 
         const nombre = document.querySelector("#nombre").value;
         const correo = document.querySelector("#correo").value;
@@ -154,6 +174,11 @@ if (form) {
 
         if (!nombre || !correo || !telefono || !fechaEntrada || !fechaSalida) {
             alert("Completa todos los campos obligatorios.");
+            return;
+        }
+
+        if (fechaSalida <= fechaEntrada) {
+            alert("La fecha de salida debe ser posterior a la fecha de llegada.");
             return;
         }
 
